@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>A Little Letter 💗</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Georgia, serif;
+    background: linear-gradient(135deg, #ffb6d9, #ffcce6, #ff9fca);
+    color: #5c2442;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* =========================
+   FLOATING HEARTS
+========================= */
+
+.floating-heart {
+    position: fixed;
+    bottom: -40px;
+    color: #ff4f9a;
+    font-size: 20px;
+    pointer-events: none;
+    z-index: 1;
+    animation: floatUp 7s linear forwards;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+
+    15% {
+        opacity: .8;
+    }
+
+    100% {
+        transform: translateY(-110vh) rotate(30deg);
+        opacity: 0;
+    }
+}
+
+/* =========================
+   SPARKLES
+========================= */
+
+.sparkle {
+    position: fixed;
+    color: white;
+    pointer-events: none;
+    animation: sparkle 2s infinite ease-in-out;
+    z-index: 1;
+}
+
+@keyframes sparkle {
+    0%,100% {
+        opacity: .2;
+        transform: scale(.7);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.3);
+    }
+}
+
+/* =========================
+   OPENING
+========================= */
+
+.opening {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 25px;
+    transition: 1s ease;
+    position: relative;
+    z-index: 2;
+}
+
+.opening.hide {
+    opacity: 0;
+    transform: scale(1.08);
+    pointer-events: none;
+}
+
+.card {
+    background: rgba(255,255,255,.65);
+    backdrop-filter: blur(12px);
+    padding: 45px 28px;
+    border-radius: 30px;
+    max-width: 500px;
+    width: 100%;
+    box-shadow: 0 15px 50px rgba(160,40,90,.15);
+    border: 2px solid rgba(255,255,255,.8);
+    animation: floating 4s ease-in-out infinite;
+}
+
+@keyframes floating {
+    0%,100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+.mini-title {
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #d83d7d;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: clamp(42px, 10vw, 70px);
+    color: #c52f6d;
+    font-weight: normal;
+    line-height: 1.05;
+}
+
+.subtitle {
+    margin-top: 20px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    color: #7b405a;
+    line-height: 1.7;
+}
+
+.open-button {
+    margin-top: 30px;
+    border: none;
+    background: #ed5796;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 50px;
+    font-size: 14px;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(214,55,120,.25);
+    transition: .3s;
+}
+
+.open-button:hover {
+    transform: scale(1.06);
+    background: #d83d7d;
+}
+
+/* =========================
+   LETTER
+========================= */
+
+.letter-section {
+    display: none;
+    min-height: 100vh;
+    padding: 70px 20px;
+    position: relative;
+    z-index: 2;
+}
+
+.letter-section.show {
+    display: block;
+    animation: appear 1.3s ease;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.letter {
+    max-width: 650px;
+    margin: auto;
+}
+
+.date {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: #c52f6d;
+    margin-bottom: 25px;
+}
+
+.letter-card {
+    background: rgba(255,255,255,.78);
+    padding: 35px 25px;
+    border-radius: 28px;
+    box-shadow: 0 15px 45px rgba(150,40,90,.13);
+    border: 2px solid rgba(255,255,255,.8);
+}
+
+.letter h2 {
+    text-align: center;
+    font-size: 38px;
+    color: #c52f6d;
+    font-weight: normal;
+    margin-bottom: 30px;
+}
+
+.letter p {
+    font-size: 16px;
+    line-height: 2;
+    margin-bottom: 22px;
+}
+
+.highlight {
+    color: #d93678;
+    font-weight: bold;
+}
+
+.signature {
+    margin-top: 40px;
+    text-align: right;
+    font-style: italic;
+    color: #b7386d;
+}
+
+/* =========================
+   SURVEY
+========================= */
+
+.survey {
+    margin-top: 45px;
+    background: rgba(255,255,255,.8);
+    padding: 30px 20px;
+    border-radius: 28px;
+    box-shadow: 0 15px 45px rgba(150,40,90,.13);
+    text-align: center;
+}
+
+.survey h3 {
+    color: #c52f6d;
+    font-size: 27px;
+    font-weight: normal;
+}
+
+.survey-intro {
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    color: #8a5269;
+    margin-top: 10px;
+}
+
+.question {
+    margin-top: 30px;
+}
+
+.question-title {
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+.options {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 9px;
+}
+
+.option {
+    border: 1px solid #ee8bb5;
+    background: #fff4f9;
+    color: #9b3864;
+    padding: 10px 16px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: .25s;
+}
+
+.option:hover,
+.option.selected {
+    background: #ed5796;
+    color: white;
+    transform: translateY(-2px);
+}
+
+.finish {
+    margin-top: 30px;
+    border: none;
+    background: #d83d7d;
+    color: white;
+    padding: 13px 28px;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+.result {
+    display: none;
+    margin-top: 25px;
+    padding: 20px;
+    background: #fff0f7;
+    border-radius: 20px;
+    color: #a43766;
+    line-height: 1.8;
+}
+
+/* =========================
+   END
+========================= */
+
+.ending {
+    text-align: center;
+    margin-top: 45px;
+    padding: 30px;
+    color: #9d5270;
+    font-size: 13px;
+    line-height: 2;
+}
+
+.big-heart {
+    font-size: 42px;
+    color: #e83f86;
+    margin-top: 15px;
+    animation: heartbeat 1.5s infinite;
+}
+
+@keyframes heartbeat {
+    0%,100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:500px) {
+
+    .card {
+        padding: 38px 20px;
+    }
+
+    .letter-card {
+        padding: 28px 20px;
+    }
+
+    .letter p {
+        font-size: 15px;
+    }
+
+}
+</style>
+</head>
+
+<body>
+
+<!-- =========================
+     OPENING
+========================= -->
+
+<section class="opening" id="opening">
+
+    <div class="card">
+
+        <div class="mini-title">
+            A little something for
+        </div>
+
+        <!-- ✏️ CHANGE HER NAME HERE -->
+        <h1>Anak ni JoJo</h1>
+
+        <p class="subtitle">
+            Three years of quietly admiring<br>
+            the person you are. 💗
+        </p>
+
+        <button class="open-button" onclick="openLetter()">
+            Open My Letter 💌
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     LETTER
+========================= -->
+
+<section class="letter-section" id="letter">
+
+    <div class="letter">
+
+        <div class="date">
+            THREE YEARS OF ADMIRING YOU
+        </div>
+
+        <div class="letter-card">
+
+            <h2>Dear Sofea, 💗</h2>
+
+            <p>
+                Three years na diay.
+            </p>
+
+            <p>
+                Tulo ka tuig nga wala nako damha nga mahimo kang
+                usa sa mga tawong espisyal para nako.
+                Daghan na siguro'g nausab sa atong duha,
+                pero naa gihapon ang same admiration nako sa
+                tawo nga ikaw.
+            </p>
+
+            <p>
+                Dili tungod kay perfect ka, pero tungod sa imong
+                pagkatawo—sa imong kabuotan, imong personality,
+                ug sa mga simple nga butang nga nakapahimo nimo
+                nga memorable og kahibaw naka ana.
+            </p>
+
+            <p>
+                Usahay, ang mga simple nga moments maoy
+                pinakabililhon. Mga ordinaryong conversations,
+                gamay nga jokes, ug mga moments nga basin para
+                nimo wala ra, pero somehow, nahimo silang
+                meaningful para nako bisan kato ra.
+            </p>
+
+            <p>
+                Wala ko nagsulat ani para mangayo og bisan unsa.
+                Gusto lang nako nga mahibaw-an nimo nga adunay
+                tawo nga nakakita sa imong pagka-special.
+            </p>
+
+            <p>
+                Maybe someday, life will give us another simple
+                moment to share. Basin makabalik ta sa mga
+                ordinaryong conversations nga kaniadto natural
+                ra kaayo.
+            </p>
+
+            <p>
+                Until then, I hope you're doing well.
+                Padayon lang sa pagka-ikaw.
+                Kay honestly,
+                <span class="highlight">
+                    you're someone worth admiring.
+                </span>
+            </p>
+
+            <div class="signature">
+                — Someone who has admired you for three years. ♡
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             CUTE SURVEY
+        ========================= -->
+
+        <div class="survey">
+
+            <h3>Before you go… </h3>
+
+            <p class="survey-intro">
+                Pwede ko mangutana og gamay?<br>
+                No pressure. Just answer honestly.<br>
+              e-screen shot lang ang imong answer please 💗
+            </p>
+
+
+            <div class="question">
+
+                <div class="question-title">
+                    Did you smile while reading this? 🥹
+                </div>
+
+                <div class="options">
+
+                    <button class="option"
+                        onclick="selectOption(this)">
+                        A little 🤭
+                    </button>
+
+                    <button class="option"
+                        onclick="selectOption(this)">
+                        Yes 💗
+                    </button>
+
+                    <button class="option"
+                        onclick="selectOption(this)">
+                        Maybe 😭
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="question">
+
+                <div class="question-title">
+                    Do you still remember our conversations? 💭
+                </div>
+
+                <div class="options">
+
+                    <button class="option"
+                        onclick="selectOption(this)">
+                        Of course
+                    </button>
+
+                    <button class="option"
+                        onclick="selectOption(this)">
+                        Sometimes
+                    </button>
+
+                    <button class="option"
+                        onclick="selectOption(this)">
+                        Maybe... 👀
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="question">
+
+                <div class="question-title">
+                    Would you talk to me again someday? 🌷
+                </div>
+
+                <div class="options">
+
+                    <button class="option"
+                        onclick="selectOption(this)">
+                        Yes Oie 💗
+                    </button>
+
+                    <button class="option"
+                        onclick="selectOption(this)">
+                        Of course
+                    </button>
+
+                    <button class="option"
+                        onclick="selectOption(this)">
+                        Ohh, bisag karon na ?
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <button class="finish" onclick="finishSurvey()">
+                That's all ♡
+            </button>
+
+
+            <div class="result" id="result">
+
+                Thank you for reading until the end. 🥺💗
+
+                <br><br>
+
+                Whatever your answers were,
+                I'm just happy you gave this little letter
+                a moment of your time.
+
+                <br><br>
+
+                <strong>Take care always. 🌷</strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="ending">
+
+            Some people are remembered<br>
+            because of the moments they gave us.
+
+            <div class="big-heart">
+                ♡
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<script>
+
+/* =========================
+   OPEN LETTER
+========================= */
+
+function openLetter() {
+
+    const opening =
+        document.getElementById("opening");
+
+    const letter =
+        document.getElementById("letter");
+
+    opening.classList.add("hide");
+
+    setTimeout(() => {
+
+        opening.style.display = "none";
+
+        letter.classList.add("show");
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    }, 900);
+}
+
+
+/* =========================
+   FLOATING HEARTS
+========================= */
+
+function createHeart() {
+
+    const heart =
+        document.createElement("div");
+
+    heart.className = "floating-heart";
+
+    const hearts = [
+        "♡",
+        "♥",
+        "💗",
+        "💖",
+        "💕"
+    ];
+
+    heart.innerText =
+        hearts[Math.floor(Math.random() * hearts.length)];
+
+    heart.style.left =
+        Math.random() * 100 + "vw";
+
+    heart.style.animationDuration =
+        (5 + Math.random() * 5) + "s";
+
+    heart.style.fontSize =
+        (12 + Math.random() * 18) + "px";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    }, 10000);
+}
+
+setInterval(createHeart, 650);
+
+
+/* =========================
+   SPARKLES
+========================= */
+
+function createSparkle() {
+
+    const sparkle =
+        document.createElement("div");
+
+    sparkle.className = "sparkle";
+
+    sparkle.innerText = "✦";
+
+    sparkle.style.left =
+        Math.random() * 100 + "vw";
+
+    sparkle.style.top =
+        Math.random() * 100 + "vh";
+
+    sparkle.style.fontSize =
+        (8 + Math.random() * 10) + "px";
+
+    sparkle.style.animationDelay =
+        Math.random() * 2 + "s";
+
+    document.body.appendChild(sparkle);
+
+    setTimeout(() => {
+        sparkle.remove();
+    }, 4000);
+}
+
+setInterval(createSparkle, 500);
+
+
+/* =========================
+   SURVEY BUTTONS
+========================= */
+
+function selectOption(button) {
+
+    const parent =
+        button.parentElement;
+
+    const buttons =
+        parent.querySelectorAll(".option");
+
+    buttons.forEach(btn => {
+        btn.classList.remove("selected");
+    });
+
+    button.classList.add("selected");
+}
+
+
+/* =========================
+   SURVEY FINISH
+========================= */
+
+function finishSurvey() {
+
+    const result =
+        document.getElementById("result");
+
+    result.style.display = "block";
+
+    result.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
+
+}
+
+</script>
+
+</body>
+</html>
+ 

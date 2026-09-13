@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -147,8 +147,9 @@ h1 {
     line-height: 1.7;
 }
 
-.open-button {
-    margin-top: 30px;
+.open-button,
+.proceed-button,
+.finish {
     border: none;
     background: #ed5796;
     color: white;
@@ -160,13 +161,19 @@ h1 {
     transition: .3s;
 }
 
-.open-button:hover {
+.open-button {
+    margin-top: 30px;
+}
+
+.open-button:hover,
+.proceed-button:hover,
+.finish:hover {
     transform: scale(1.06);
     background: #d83d7d;
 }
 
 /* =========================
-   LETTER
+   LETTER ROOM
 ========================= */
 
 .letter-section {
@@ -243,33 +250,84 @@ h1 {
 }
 
 /* =========================
-   SURVEY
+   PROCEED AREA
 ========================= */
 
-.survey {
+.proceed-area {
+    text-align: center;
     margin-top: 45px;
-    background: rgba(255,255,255,.8);
-    padding: 30px 20px;
-    border-radius: 28px;
-    box-shadow: 0 15px 45px rgba(150,40,90,.13);
+    padding: 30px;
+}
+
+.proceed-text {
+    color: #9d5270;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    margin-bottom: 18px;
+}
+
+/* =========================
+   SURVEY ROOM
+========================= */
+
+.survey-room {
+    display: none;
+    min-height: 100vh;
+    padding: 70px 20px;
+    position: relative;
+    z-index: 2;
+}
+
+.survey-room.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: roomAppear 1.2s ease;
+}
+
+@keyframes roomAppear {
+    from {
+        opacity: 0;
+        transform: translateX(70px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.survey-box {
+    width: 100%;
+    max-width: 650px;
+    background: rgba(255,255,255,.82);
+    padding: 35px 25px;
+    border-radius: 30px;
+    box-shadow: 0 20px 55px rgba(150,40,90,.15);
+    border: 2px solid rgba(255,255,255,.85);
     text-align: center;
 }
 
-.survey h3 {
+.survey-box h2 {
     color: #c52f6d;
-    font-size: 27px;
+    font-size: 38px;
     font-weight: normal;
+    margin-bottom: 12px;
 }
 
 .survey-intro {
     font-family: Arial, sans-serif;
     font-size: 13px;
     color: #8a5269;
-    margin-top: 10px;
+    line-height: 1.8;
+    margin-bottom: 25px;
 }
 
 .question {
     margin-top: 30px;
+    padding: 22px 15px;
+    background: #fff5fa;
+    border-radius: 22px;
 }
 
 .question-title {
@@ -286,7 +344,7 @@ h1 {
 
 .option {
     border: 1px solid #ee8bb5;
-    background: #fff4f9;
+    background: white;
     color: #9b3864;
     padding: 10px 16px;
     border-radius: 25px;
@@ -303,18 +361,12 @@ h1 {
 
 .finish {
     margin-top: 30px;
-    border: none;
-    background: #d83d7d;
-    color: white;
-    padding: 13px 28px;
-    border-radius: 30px;
-    cursor: pointer;
 }
 
 .result {
     display: none;
     margin-top: 25px;
-    padding: 20px;
+    padding: 22px;
     background: #fff0f7;
     border-radius: 20px;
     color: #a43766;
@@ -322,13 +374,13 @@ h1 {
 }
 
 /* =========================
-   END
+   ENDING
 ========================= */
 
 .ending {
     text-align: center;
-    margin-top: 45px;
-    padding: 30px;
+    margin-top: 40px;
+    padding: 20px;
     color: #9d5270;
     font-size: 13px;
     line-height: 2;
@@ -361,7 +413,8 @@ h1 {
         padding: 38px 20px;
     }
 
-    .letter-card {
+    .letter-card,
+    .survey-box {
         padding: 28px 20px;
     }
 
@@ -369,6 +422,9 @@ h1 {
         font-size: 15px;
     }
 
+    .survey-box h2 {
+        font-size: 32px;
+    }
 }
 </style>
 </head>
@@ -376,7 +432,7 @@ h1 {
 <body>
 
 <!-- =========================
-     OPENING
+     OPENING ROOM
 ========================= -->
 
 <section class="opening" id="opening">
@@ -387,7 +443,6 @@ h1 {
             A little something for
         </div>
 
-        <!-- ✏️ CHANGE HER NAME HERE -->
         <h1>Anak ni JoJo</h1>
 
         <p class="subtitle">
@@ -405,7 +460,7 @@ h1 {
 
 
 <!-- =========================
-     LETTER
+     LETTER ROOM
 ========================= -->
 
 <section class="letter-section" id="letter">
@@ -476,125 +531,156 @@ h1 {
         </div>
 
 
-        <!-- =========================
-             CUTE SURVEY
-        ========================= -->
+        <!-- PROCEED TO SURVEY -->
 
-        <div class="survey">
+        <div class="proceed-area">
 
-            <h3>Before you go… </h3>
-
-            <p class="survey-intro">
-                Pwede ko mangutana og gamay?<br>
-                No pressure. Just answer honestly.<br>
-              e-screen shot lang ang imong answer please 💗
+            <p class="proceed-text">
+                There's one more little thing waiting for you… 💗
             </p>
 
-
-            <div class="question">
-
-                <div class="question-title">
-                    Did you smile while reading this? 🥹
-                </div>
-
-                <div class="options">
-
-                    <button class="option"
-                        onclick="selectOption(this)">
-                        A little 🤭
-                    </button>
-
-                    <button class="option"
-                        onclick="selectOption(this)">
-                        Yes 💗
-                    </button>
-
-                    <button class="option"
-                        onclick="selectOption(this)">
-                        Maybe 😭
-                    </button>
-
-                </div>
-
-            </div>
-
-
-            <div class="question">
-
-                <div class="question-title">
-                    Do you still remember our conversations? 💭
-                </div>
-
-                <div class="options">
-
-                    <button class="option"
-                        onclick="selectOption(this)">
-                        Of course
-                    </button>
-
-                    <button class="option"
-                        onclick="selectOption(this)">
-                        Sometimes
-                    </button>
-
-                    <button class="option"
-                        onclick="selectOption(this)">
-                        Maybe... 👀
-                    </button>
-
-                </div>
-
-            </div>
-
-
-            <div class="question">
-
-                <div class="question-title">
-                    Would you talk to me again someday? 🌷
-                </div>
-
-                <div class="options">
-
-                    <button class="option"
-                        onclick="selectOption(this)">
-                        Yes Oie 💗
-                    </button>
-
-                    <button class="option"
-                        onclick="selectOption(this)">
-                        Of course
-                    </button>
-
-                    <button class="option"
-                        onclick="selectOption(this)">
-                        Ohh, bisag karon na ?
-                    </button>
-
-                </div>
-
-            </div>
-
-
-            <button class="finish" onclick="finishSurvey()">
-                That's all ♡
+            <button class="proceed-button" onclick="openSurvey()">
+                Please Proceed →
             </button>
 
+        </div>
 
-            <div class="result" id="result">
+    </div>
 
-                Thank you for reading until the end. 🥺💗
+</section>
 
-                <br><br>
 
-                Whatever your answers were,
-                I'm just happy you gave this little letter
-                a moment of your time.
+<!-- =========================
+     SURVEY ROOM
+========================= -->
 
-                <br><br>
+<section class="survey-room" id="surveyRoom">
 
-                <strong>Take care always. 🌷</strong>
+    <div class="survey-box">
+
+        <div class="date">
+            ONE LAST LITTLE THING 💗
+        </div>
+
+        <h2>A Tiny Survey 🥹</h2>
+
+        <p class="survey-intro">
+            You've made it this far… so answer these honestly. 🤭<br>
+            No pressure, promise.<br><br>
+            <strong>Screenshot lang sa imong answers please. 💗</strong>
+        </p>
+
+
+        <div class="question">
+
+            <div class="question-title">
+                Did you smile while reading this? 🥹
+            </div>
+
+            <div class="options">
+
+                <button class="option"
+                    onclick="selectOption(this)">
+                    A little 🤭
+                </button>
+
+                <button class="option"
+                    onclick="selectOption(this)">
+                    Yes 💗
+                </button>
+
+                <button class="option"
+                    onclick="selectOption(this)">
+                    Maybe 😭
+                </button>
 
             </div>
+
+        </div>
+
+
+        <div class="question">
+
+            <div class="question-title">
+                Do you still remember our conversations? 💭
+            </div>
+
+            <div class="options">
+
+                <button class="option"
+                    onclick="selectOption(this)">
+                    Of course
+                </button>
+
+                <button class="option"
+                    onclick="selectOption(this)">
+                    Sometimes
+                </button>
+
+                <button class="option"
+                    onclick="selectOption(this)">
+                    Maybe... 👀
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="question">
+
+            <div class="question-title">
+                Would you talk to me again someday? 🌷
+            </div>
+
+            <div class="options">
+
+                <button class="option"
+                    onclick="selectOption(this)">
+                    Yes Oie 💗
+                </button>
+
+                <button class="option"
+                    onclick="selectOption(this)">
+                    Of course
+                </button>
+
+                <button class="option"
+                    onclick="selectOption(this)">
+                    Ohh, bisag karon na? 👀
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <button class="finish" onclick="finishSurvey()">
+            That's all ♡
+        </button>
+
+
+        <div class="result" id="result">
+
+            Thank you for reading until the end. 🥺💗
+
+            <br><br>
+
+            Whatever your answers were,
+            I'm just happy you gave this little letter
+            a moment of your time.
+
+            <br><br>
+
+            <strong>
+                Take care always, Sofea. 🌷
+            </strong>
+
+            <br><br>
+
+            <span style="font-size:25px;">
+                ♡
+            </span>
 
         </div>
 
@@ -643,6 +729,29 @@ function openLetter() {
         });
 
     }, 900);
+}
+
+
+/* =========================
+   OPEN SURVEY ROOM
+========================= */
+
+function openSurvey() {
+
+    const letter =
+        document.getElementById("letter");
+
+    const survey =
+        document.getElementById("surveyRoom");
+
+    letter.style.display = "none";
+
+    survey.classList.add("show");
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 }
 
 
@@ -743,7 +852,7 @@ function selectOption(button) {
 
 
 /* =========================
-   SURVEY FINISH
+   FINISH SURVEY
 ========================= */
 
 function finishSurvey() {
@@ -764,4 +873,3 @@ function finishSurvey() {
 
 </body>
 </html>
- 
